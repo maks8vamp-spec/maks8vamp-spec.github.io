@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZALUPA FM - музыкальная платформа</title>
+    <title>MUSIC FM - музыкальная платформа</title>
     <style>
         * {
             margin: 0;
@@ -170,13 +170,14 @@
         .playlist-cover {
             width: 100%;
             height: 180px;
-            background: linear-gradient(45deg, #8a2be2, #ff69b4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            color: white;
-            text-shadow: 0 0 10px #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .playlist-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .playlist-info {
@@ -195,15 +196,14 @@
             font-size: 14px;
         }
         
-        /* Стили для аудиоплеера "Для работы" */
-        .work-controls {
-            display: none;
+        .audio-controls {
+            display: flex;
             align-items: center;
             gap: 10px;
             margin-top: 10px;
         }
         
-        .work-btn {
+        .audio-btn {
             background: linear-gradient(45deg, #00ffff, #ff00ff);
             border: none;
             color: white;
@@ -214,12 +214,12 @@
             transition: all 0.3s;
         }
         
-        .work-btn:hover {
+        .audio-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 10px #00ffff;
         }
         
-        .work-status {
+        .audio-status {
             font-size: 13px;
             color: #aaa;
         }
@@ -384,13 +384,13 @@
 </head>
 <body>
     <header>
-        <div class="logo">ZALUPA <span>FM</span></div>
+        <div class="logo">MUSIC <span>FM</span></div>
         <nav>
             <ul>
-                <li><a href="https://discord.gg/EmvnPNU22r" target="_blank">Главная</a></li>
-                <li><a href="https://sex-studentki.beer/" target="_blank">Поиск</a></li>
-                <li><a href="https://i.pinimg.com/originals/8f/4b/2b/8f4b2bce58fc82da9aa8604fa33cb8c3.jpg" target="_blank">Моя Залупа</a></li>
-                <li><a href="https://pornosliv.com/" target="_blank">Любимые писечки</a></li>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Поиск</a></li>
+                <li><a href="#">Моя музыка</a></li>
+                <li><a href="#">Любимые треки</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -405,14 +405,14 @@
     <div class="main-content">
         <div class="sidebar">
             <ul class="sidebar-menu">
-                <li><a href="https://discord.gg/EmvnPNU22r" target="_blank"><i class="fas fa-home"></i> Главная</a></li>
-                <li><a href="https://sex-studentki.beer/" target="_blank"><i class="fas fa-search"></i> Поиск</a></li>
-                <li><a href="https://i.pinimg.com/originals/8f/4b/2b/8f4b2bce58fc82da9aa8604fa33cb8c3.jpg" target="_blank"><i class="fas fa-music"></i> Моя Залупа</a></li>
-                <li><a href="https://pornosliv.com/" target="_blank"><i class="fas fa-heart"></i> Любимые писечки</a></li>
-                <li><a href="https://vk.com/id412231055" target="_blank"><i class="fas fa-list"></i> Плейлисты</a></li>
-                <li><a href="https://pretto-promo.unagrande.company/?utm_source=yandex&utm_medium=cpc&utm_content=n:pretto_ncp_rf_rsya%7Cc:701070111%7Cb:17145850247%7Ck:---autotargeting%7Cd:desktop&utm_term=browser.yandex.ru&utm_campaign=pretto_ncp&yclid=1459350953619357695" target="_blank"><i class="fas fa-clock"></i> Недавние</a></li>
-                <li><a href="https://browser.yandex.ru/help/ru/working-with-files/download-files" target="_blank"><i class="fas fa-download"></i> Загрузки</a></li>
-                <li><a href="https://vk.com/maksyak2" target="_blank"><i class="fas fa-cog"></i> Настройки</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Главная</a></li>
+                <li><a href="#"><i class="fas fa-search"></i> Поиск</a></li>
+                <li><a href="#"><i class="fas fa-music"></i> Моя музыка</a></li>
+                <li><a href="#"><i class="fas fa-heart"></i> Любимые треки</a></li>
+                <li><a href="#"><i class="fas fa-list"></i> Плейлисты</a></li>
+                <li><a href="#"><i class="fas fa-clock"></i> Недавние</a></li>
+                <li><a href="#"><i class="fas fa-download"></i> Загрузки</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Настройки</a></li>
             </ul>
         </div>
         
@@ -420,38 +420,97 @@
             <h2 class="section-title">Рекомендуем вам</h2>
             <div class="playlists">
                 <div class="playlist-card">
-                    <img src="PIska\max.jpg" class="now-playing-avatar" alt="ава хитов">
+                    <div class="playlist-cover">
+                        <img src="PIska\max.jpg" class="playlist-avatar" alt="Горячие хиты">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Горячие хиты</div>
                         <div class="playlist-description">Топ-100 треков</div>
+                        <audio id="audio1" loop>
+                            <source src="PIska\audio\m.mp3" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio1', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="playlist-card">
-                    <img src="PIska\tg.jpg" class="now-playing-avatar" alt="рэпочок чувочок">
+                    <div class="playlist-cover">
+                        <img src="PIska\tg" class="playlist-avatar" alt="Русский рэп">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Русский рэп</div>
                         <div class="playlist-description">Лучшие хиты</div>
+                        <audio id="audio2" loop>
+                            <source src="audio\tg" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio2', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="playlist-card">
-                    <img src="PIska\nt.jpg" class="now-playing-avatar" alt="Аватар исполнителя">
+                    <div class="playlist-cover">
+                        <img src="PIska\nt" class="playlist-avatar" alt="Рок коллекция">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Рок коллекция</div>
                         <div class="playlist-description">Классика жанра</div>
+                        <audio id="audio3" loop>
+                            <source src="audio\nt" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio3', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="playlist-card">
-                    <img src="PIska\st.jpg" class="now-playing-avatar" alt="Аватар исполнителя">
+                    <div class="playlist-cover">
+                        <img src="PIska\st" class="playlist-avatar" alt="Электроника">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Электроника</div>
                         <div class="playlist-description">Танцевальные биты</div>
+                        <audio id="audio4" loop>
+                            <source src="audip\st" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio4', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="playlist-card">
-                    <img src="PIska\my.jpg" class="now-playing-avatar" alt="Аватар блюз">
+                    <div class="playlist-cover">
+                        <img src="PIska\my" class="playlist-avatar" alt="Джаз и блюз">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Джаз и блюз</div>
                         <div class="playlist-description">Для ценителей</div>
+                        <audio id="audio5" loop>
+                            <source src="audio\my" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio5', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -459,46 +518,59 @@
             <h2 class="section-title">Недавно слушали</h2>
             <div class="playlists">
                 <div class="playlist-card">
-                    <img src="PIska\ks.jpg" class="now-playing-avatar" alt="Аватар исполнителя">
+                    <div class="playlist-cover">
+                        <img src="PIska\ks" class="playlist-avatar" alt="Мой плейлист">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Мой плейлист #1</div>
                         <div class="playlist-description">25 треков</div>
-                    </div>
-                </div>
-                <div class="playlist-card" id="work-playlist">
-    <!-- Исправленный блок с аватаркой -->
-    <div class="playlist-cover" onclick="toggleWorkMusic()">
-        <img src="PIska/d.jpg" class="playlist-avatar" alt="Для работы">
-    </div>
-    
-    <div class="playlist-info">
-        <div class="playlist-name">Для работы</div>
-        <div class="playlist-description">Фоновая музыка</div>
-        <audio id="work-audio" loop>
-            <source src="audio/123.mp3" type="audio/mpeg">
-            Ваш браузер не поддерживает аудио
-        </audio>
-        <div class="work-controls">
-            <button onclick="toggleWorkMusic()" class="work-btn">
-                <i class="fas fa-play"></i> Включить
-            </button>
-            <span class="work-status">Выключено</span>
-        </div>
-    </div>
-</div>
-    
-  
-        </div>
-    </div>
-</div>
+                        <audio id="audio6" loop>
+                            <source src="audio\ks" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio6', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
                         </div>
                     </div>
                 </div>
+                
                 <div class="playlist-card">
-                    <img src="PIska\s.jpg" class="now-playing-avatar" alt="Аватар исполнителя">
+                    <div class="playlist-cover">
+                        <img src="PIska\d" class="playlist-avatar" alt="Для работы">
+                    </div>
+                    <div class="playlist-info">
+                        <div class="playlist-name">Для работы</div>
+                        <div class="playlist-description">Фоновая музыка</div>
+                        <audio id="audio7" loop>
+                            <source src="audio\123" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio7', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="playlist-card">
+                    <div class="playlist-cover">
+                        <img src="PIska\s" class="playlist-avatar" alt="Для тренировки">
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Для тренировки</div>
                         <div class="playlist-description">Энергичные треки</div>
+                        <audio id="audio8" loop>
+                            <source src="audio\s" type="audio/mpeg">
+                        </audio>
+                        <div class="audio-controls">
+                            <button onclick="toggleAudio('audio8', this)" class="audio-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="audio-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -542,29 +614,63 @@
     </div>
 
     <script>
-        function toggleWorkMusic() {
-            const audio = document.getElementById('work-audio');
-            const btn = document.querySelector('.work-btn i');
-            const status = document.querySelector('.work-status');
-            const controls = document.querySelector('.work-controls');
+        // Функция для управления аудио
+        function toggleAudio(audioId, button) {
+            const audio = document.getElementById(audioId);
+            const icon = button.querySelector('i');
+            const status = button.nextElementSibling;
             
-            // Показываем контролы при первом клике
-            if (controls.style.display === 'none') {
-                controls.style.display = 'flex';
-            }
+            // Останавливаем все другие аудио
+            document.querySelectorAll('audio').forEach(a => {
+                if (a.id !== audioId && !a.paused) {
+                    a.pause();
+                    const otherButton = a.parentElement.querySelector('.audio-btn');
+                    const otherIcon = otherButton.querySelector('i');
+                    const otherStatus = otherButton.nextElementSibling;
+                    
+                    otherIcon.classList.replace('fa-pause', 'fa-play');
+                    otherStatus.textContent = 'Выключено';
+                    otherStatus.style.color = '#aaa';
+                }
+            });
             
             if (audio.paused) {
                 audio.play();
-                btn.classList.replace('fa-play', 'fa-pause');
+                icon.classList.replace('fa-play', 'fa-pause');
                 status.textContent = 'Играет';
                 status.style.color = '#00ffff';
+                
+                // Обновляем главный плеер
+                updateMainPlayer(audioId);
             } else {
                 audio.pause();
-                btn.classList.replace('fa-pause', 'fa-play');
+                icon.classList.replace('fa-pause', 'fa-play');
                 status.textContent = 'Выключено';
                 status.style.color = '#aaa';
             }
         }
+        
+        // Функция для обновления главного плеера
+        function updateMainPlayer(audioId) {
+            const playlist = document.getElementById(audioId).parentElement.parentElement;
+            const title = playlist.querySelector('.playlist-name').textContent;
+            const description = playlist.querySelector('.playlist-description').textContent;
+            
+            document.querySelector('.now-playing-title').textContent = title;
+            document.querySelector('.now-playing-artist').textContent = description;
+        }
+        
+        // Управление главным плеером
+        document.querySelector('.play-pause').addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-pause')) {
+                icon.classList.replace('fa-pause', 'fa-play');
+                // Здесь должна быть логика паузы текущего трека
+            } else {
+                icon.classList.replace('fa-play', 'fa-pause');
+                // Здесь должна быть логика воспроизведения текущего трека
+            }
+        });
     </script>
 </body>
 </html>
