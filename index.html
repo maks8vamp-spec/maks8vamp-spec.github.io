@@ -195,6 +195,35 @@
             font-size: 14px;
         }
         
+        /* Стили для аудиоплеера "Для работы" */
+        .work-controls {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .work-btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .work-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .work-status {
+            font-size: 13px;
+            color: #aaa;
+        }
+        
         .player-bar {
             position: fixed;
             bottom: 0;
@@ -350,15 +379,6 @@
             border-radius: 2px;
             box-shadow: 0 0 5px #00ffff;
         }
-
-        /* Неоновые эффекты */
-        .neon-text {
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-        }
-
-        .neon-box {
-            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -445,11 +465,23 @@
                         <div class="playlist-description">25 треков</div>
                     </div>
                 </div>
-                <div class="playlist-card">
-                    <img src="PIska\d.jpg" class="now-playing-avatar" alt="Аватар исполнителя">
+                <div class="playlist-card" id="work-playlist">
+                    <div class="playlist-cover" onclick="toggleWorkMusic()">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
                     <div class="playlist-info">
                         <div class="playlist-name">Для работы</div>
                         <div class="playlist-description">Фоновая музыка</div>
+                        <audio id="work-audio" loop>
+                            <source src="D:\PIska\123.mp3" type="audio/mpeg">
+                            Ваш браузер не поддерживает аудио
+                        </audio>
+                        <div class="work-controls">
+                            <button onclick="toggleWorkMusic()" class="work-btn">
+                                <i class="fas fa-play"></i> Включить
+                            </button>
+                            <span class="work-status">Выключено</span>
+                        </div>
                     </div>
                 </div>
                 <div class="playlist-card">
@@ -498,5 +530,31 @@
             <button><i class="fas fa-expand"></i></button>
         </div>
     </div>
+
+    <script>
+        function toggleWorkMusic() {
+            const audio = document.getElementById('work-audio');
+            const btn = document.querySelector('.work-btn i');
+            const status = document.querySelector('.work-status');
+            const controls = document.querySelector('.work-controls');
+            
+            // Показываем контролы при первом клике
+            if (controls.style.display === 'none') {
+                controls.style.display = 'flex';
+            }
+            
+            if (audio.paused) {
+                audio.play();
+                btn.classList.replace('fa-play', 'fa-pause');
+                status.textContent = 'Играет';
+                status.style.color = '#00ffff';
+            } else {
+                audio.pause();
+                btn.classList.replace('fa-pause', 'fa-play');
+                status.textContent = 'Выключено';
+                status.style.color = '#aaa';
+            }
+        }
+    </script>
 </body>
 </html>
